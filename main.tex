@@ -1,0 +1,195 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{courier}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{inconsolata}
+\usepackage[utf8x]{inputenc}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage[calcwidth]{titlesec}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{verbatim}
+
+% Make links non-black so that they are obvious:
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=blue
+}
+
+% Color scheme stolen from Base16 shell. Thanks Chris.
+% https://chriskempson.github.io/base16/
+\definecolor{base00}{rgb}{0.000,0.169,0.212}
+\definecolor{base01}{rgb}{0.027,0.212,0.259}
+\definecolor{base02}{rgb}{0.345,0.431,0.459}
+\definecolor{base03}{rgb}{0.396,0.482,0.514}
+\definecolor{base04}{rgb}{0.514,0.580,0.588}
+\definecolor{base05}{rgb}{0.576,0.631,0.631}
+\definecolor{base06}{rgb}{0.933,0.910,0.835}
+\definecolor{base07}{rgb}{0.992,0.965,0.890}
+\definecolor{base08}{rgb}{0.863,0.196,0.184}
+\definecolor{base09}{rgb}{0.796,0.294,0.086}
+\definecolor{base0B}{rgb}{0.522,0.600,0.000}
+\definecolor{base0A}{rgb}{0.710,0.537,0.000}
+\definecolor{base0C}{rgb}{0.165,0.631,0.596}
+\definecolor{base0D}{rgb}{0.149,0.545,0.824}
+\definecolor{base0E}{rgb}{0.424,0.443,0.769}
+\definecolor{base0F}{rgb}{0.827,0.212,0.510}
+
+% Color scheme is a bright color scheme.
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{base07},
+    commentstyle=\color{base03},
+    keywordstyle=\color{base0E},
+    numberstyle=\color{base09},
+    stringstyle=\color{base0B},
+    basicstyle=\small\ttfamily\color{base02},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    frame=single,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{language=C, style=mystyle}
+
+% Color for section numbering:
+\definecolor{sectioncolor}{rgb}{0.7,0.7,0.7}
+\renewcommand\thesection{\color{sectioncolor}\arabic{section}}
+
+% Move section numbering into margin:
+\makeatletter
+\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}
+\makeatother
+
+%===============================================================================
+% Header and Footer
+%-------------------------------------------------------------------------------
+\setlength{\headheight}{15.0pt}
+
+\topmargin=-12mm
+\oddsidemargin=0mm  % Gap between margin and content
+\textwidth=170mm    % The width of the content
+\textheight=249mm   % The height of the content
+\headsep=7mm        % Space between header and content
+\hoffset=-5.4mm     % Left Margin = 25.4mm + \hoffset
+
+\pagestyle{fancy}
+\lhead{}
+\chead{\projectClass : \projectTitle}
+\rhead{}
+\lfoot{\projectAuthorName}
+\cfoot{}
+\rfoot{Page\ \thepage\ of \protect\pageref{LastPage}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+%===============================================================================
+
+%===============================================================================
+% Title Page Variables and Definitions
+%-------------------------------------------------------------------------------
+\newcommand{\projectTitle}{Project Title}
+\newcommand{\projectDueDate}{\today}
+\newcommand{\projectSchool}{Company Name or School}
+\newcommand{\projectClass}{Specific Team or Class}
+\newcommand{\projectInstructor}{Manager or Lecturer}
+\newcommand{\projectAuthorName}{Author Name or Team Name}
+
+% Instead of using \maketitle we can use \printtitle and \printauthor. This bit
+% allows an abstract to go in between:
+\makeatletter
+\def\printtitle{%
+    {\centering \@title\par}}
+\makeatother
+
+\makeatletter
+\def\printauthor{%
+    {\centering \large \@author}}
+\makeatother
+
+\title{
+    \textsc{\normalfont \normalsize \projectSchool \hspace{3mm} \projectClass} \\[0pt]
+    \rule{\linewidth}{0.5pt} \\[10pt]
+    \huge \textbf{\projectTitle} \\
+    \rule{\linewidth}{2pt} \\ [5mm]
+    \normalsize \today
+}
+
+\author{
+    \begin{table}[h]
+    \centering
+        \begin{tabular}{c@{\hskip 15mm}c}
+    \textsc{LastName1}, FirstName1  & \textsc{LastName2}, FirstName2\\
+    Credentials/Role                & Credentials/Role\\
+    \texttt{Contact/Email}          & \texttt{Contact/Email} \\
+    \end{tabular}
+    \end{table}
+}
+%===============================================================================
+
+\begin{document}
+
+%===============================================================================
+% Title Page and ToC
+%-------------------------------------------------------------------------------
+% Remove header/footer styling:
+\thispagestyle{empty}
+
+\printtitle
+\vspace{15mm}
+
+\begin{abstract}
+\noindent
+\lipsum[1]
+\end{abstract}
+
+\vfill
+\printauthor
+
+\newpage
+\tableofcontents
+\newpage
+%===============================================================================
+
+\section{Examples}
+The following \hyperref[eq:famousequation]{equation} is interesting.
+
+\begin{equation}
+    \label{eq:famousequation}
+    e = mc^2
+\end{equation}
+
+\noindent
+Here is some inline code, it tells you every program has an entry point, usually
+called \lstinline{main}, in C it looks like \lstinline{int main(void)}. An
+example is the following code snippet.
+
+\begin{lstlisting}[style=mystyle]
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello, world!");
+    return 0;
+}
+\end{lstlisting}
+
+
+\end{document}
